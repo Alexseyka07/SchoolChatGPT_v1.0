@@ -1,10 +1,14 @@
 ﻿using SchoolChatGPT_v1._0.NeuralNetworkClasses;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
-namespace SchoolChatGPT_v1._0.Training
+namespace SetWordsForNeuralNetwork
 {
-    public class Training
+    public class Sentences
     {
         // Создаем обучающий набор данных (примеры: ожидаемый результат, входные данные)
         private List<Tuple<double, double[]>> trainingData = new List<Tuple<double, double[]>>()
@@ -13,35 +17,33 @@ namespace SchoolChatGPT_v1._0.Training
 
         private Data data;
         private Dictionary<string, int> wordsData;
-
-        public Training()
+        private List<Tuple<double, string>> sentencesAndValue;
+        private string sentences;
+        public Sentences(string sentences)
         {
             data = new Data();
             data = data.GetData();
         }
-
-        public void TrainingNeuralNetwork()
+        private List<Tuple<double,string>> SetSentences(string sentences) 
         {
-            Topology topology = new Topology(inputCount: Vocalulary.Vocabulary.Count, outputCount: 1, learningRate: 0.9, layers: new int[] { 4 });
-
-            // Создаем нейронную сеть
-            NeuralNetwork neuralNetwork = new NeuralNetwork(topology);
-
-            Console.WriteLine("Обучение");
-            Console.WriteLine("0 - пример о вопросе или 1 - задача");
-            for (int i = 0; i < 50; i++)
+            List < Tuple<double, string> > result = new List<Tuple<double, string>>();
+            string[] arraySentensesAndValue = sentences.Split(':');
+            for (int i = 0; i < arraySentensesAndValue.Length; i++)
             {
-                Vocalulary.Learning();
+                try
+                {
+                    string[] array = arraySentensesAndValue[i].Split('$');
+                    double value = int.Parse(array[0]);
+                    result.Add(new Tuple<double, string>(value, RemovePunctuation(array[i])));
+                }
+                catch 
+                {
+                
+                }
             }
-
-            // Обучаем нейронную сеть
-
-            double error = neuralNetwork.Learn(Vocalulary.TrainingData, epoch: 100000);
-
-            Console.WriteLine($"Ошибка после обучения: {error}");
+            return result;
         }
-
-        private void SetQuetions()
+        public void SetQuetions()
         {
             var wordsOfQuetion = Console.ReadLine().Split();
             var vector = new double[wordsData.Count];
@@ -68,6 +70,13 @@ namespace SchoolChatGPT_v1._0.Training
                 var input = double.Parse(Console.ReadLine());
                 trainingData.Add(new Tuple<double, double[]>(input, vector));
             }
+        }
+        private string RemovePunctuation(string input)
+        {
+            // Используем регулярное выражение для удаления знаков препинания
+            input = Regex.Replace(input, @"[\p{P}-[.]]", string.Empty);
+
+            return input;
         }
     }
 }

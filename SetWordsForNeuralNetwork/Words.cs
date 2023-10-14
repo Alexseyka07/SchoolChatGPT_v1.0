@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace SchoolChatGPT_v1._0.Set_Words
+namespace SetWordsForNeuralNetwork
 {
     public class Words
     {

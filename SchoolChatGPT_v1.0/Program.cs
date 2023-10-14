@@ -1,4 +1,4 @@
-﻿using SchoolChatGPT_v1._0.Set_Words;
+﻿
 using System;
 
 namespace SchoolChatGPT_v1._0
@@ -7,8 +7,7 @@ namespace SchoolChatGPT_v1._0
     {
         private static void Main(string[] args)
         {
-            Words words = new Words();
-            words.SetWords(Console.ReadLine());
+            
             Console.ReadLine();
             // Создаем топологию сети
             /*Topology topology = new Topology(inputCount: Vocalulary.Vocabulary.Count, outputCount: 1, learningRate: 0.9, layers: new int[] { 4 });

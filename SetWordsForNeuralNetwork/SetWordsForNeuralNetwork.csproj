@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4195D69E-193D-4D9C-99D4-B0CB5AB3F64E}</ProjectGuid>
+    <ProjectGuid>{2D4767EA-1111-412E-80BD-3EB2D6F5F5F0}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SchoolChatGPT_v1._0</RootNamespace>
-    <AssemblyName>SchoolChatGPT_v1.0</AssemblyName>
+    <RootNamespace>SetWordsForNeuralNetwork</RootNamespace>
+    <AssemblyName>SetWordsForNeuralNetwork</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,21 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NeuralNetworkClasses\Data.cs" />
-    <Compile Include="NeuralNetworkClasses\Layer.cs" />
-    <Compile Include="NeuralNetworkClasses\NeuralNetwork.cs" />
-    <Compile Include="NeuralNetworkClasses\Neuron.cs" />
-    <Compile Include="NeuralNetworkClasses\NeuronType.cs" />
-    <Compile Include="NeuralNetworkClasses\Topology.cs" />
-    <Compile Include="NeuralNetworkClasses\Vocalulary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Training\Training.cs" />
+    <Compile Include="Sentences.cs" />
+    <Compile Include="Words.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0.csproj">
+      <Project>{4195d69e-193d-4d9c-99d4-b0cb5ab3f64e}</Project>
+      <Name>SchoolChatGPT_v1.0</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
