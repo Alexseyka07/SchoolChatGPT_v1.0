@@ -18,13 +18,14 @@ namespace SetWordsForNeuralNetwork
         private Data data;
         private Dictionary<string, int> wordsData;
         private List<Tuple<double, string>> sentencesAndValue;
-        private string sentences;
-        public Sentences(string sentences)
+        
+        public Sentences()
         {
             data = new Data();
             data = data.GetData();
+            
         }
-        private List<Tuple<double,string>> SetSentences(string sentences) 
+        public List<Tuple<double,string>> SetSentences(string sentences) 
         {
             List < Tuple<double, string> > result = new List<Tuple<double, string>>();
             string[] arraySentensesAndValue = sentences.Split(':');

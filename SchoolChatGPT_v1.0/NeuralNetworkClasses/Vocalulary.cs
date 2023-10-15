@@ -229,7 +229,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
                 }
             }
             Data data = new Data(Vocabulary, trainingData);
-            data.SetData();
+          //  data.SetData();
         }
 
         private static string RemovePunctuation(string input)

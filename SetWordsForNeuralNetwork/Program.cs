@@ -43,7 +43,9 @@ namespace SetWordsForNeuralNetwork
         {
            
             Console.WriteLine("Введите предложения и выходной результат в виде: предложение$1 или 0,:");
-
+            string input = Console.ReadLine();
+            Sentences sentences = new Sentences();
+            sentences.SetSentences(input);
             
         }
     }
