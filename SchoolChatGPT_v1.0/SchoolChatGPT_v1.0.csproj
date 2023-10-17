@@ -52,7 +52,6 @@
     <Compile Include="NeuralNetworkClasses\Neuron.cs" />
     <Compile Include="NeuralNetworkClasses\NeuronType.cs" />
     <Compile Include="NeuralNetworkClasses\Topology.cs" />
-    <Compile Include="NeuralNetworkClasses\Vocalulary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Training\Training.cs" />

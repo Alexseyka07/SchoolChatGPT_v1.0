@@ -7,66 +7,49 @@ namespace SchoolChatGPT_v1._0.Training
     public class Training
     {
         // Создаем обучающий набор данных (примеры: ожидаемый результат, входные данные)
-        private List<Tuple<double, double[]>> trainingData = new List<Tuple<double, double[]>>()
-        {
-        };
+        private List<Tuple<double, double[]>> trainingData;
+        
 
-        private Data data;
         private Dictionary<string, int> wordsData;
+        private Data data;
 
         public Training()
         {
             data = new Data();
             data = data.GetData();
+            trainingData = data.trainingData;
+            wordsData = data.wordsData;
         }
 
         public void TrainingNeuralNetwork()
         {
-            Topology topology = new Topology(inputCount: Vocalulary.Vocabulary.Count, outputCount: 1, learningRate: 0.9, layers: new int[] { 4 });
+            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 15, 5 });
 
             // Создаем нейронную сеть
             NeuralNetwork neuralNetwork = new NeuralNetwork(topology);
 
-            Console.WriteLine("Обучение");
-            Console.WriteLine("0 - пример о вопросе или 1 - задача");
-            for (int i = 0; i < 50; i++)
-            {
-                Vocalulary.Learning();
-            }
-
             // Обучаем нейронную сеть
 
-            double error = neuralNetwork.Learn(Vocalulary.TrainingData, epoch: 100000);
+            double error = neuralNetwork.Learn(trainingData, epoch: 61);
 
             Console.WriteLine($"Ошибка после обучения: {error}");
-        }
 
-        private void SetQuetions()
-        {
-            var wordsOfQuetion = Console.ReadLine().Split();
-            var vector = new double[wordsData.Count];
-            for (int i = 0; i < vector.Length; i++)
+            while (true)
             {
-                vector[i] = 0;
-            }
-            for (int i = 0; i < wordsOfQuetion.Length; i++)
-            {
-                if (wordsData.ContainsKey(wordsOfQuetion[i]))
+                var text = Console.ReadLine();
+                if (text == "1")
                 {
-                    var num = wordsData[wordsOfQuetion[i]];
-                    vector[num - 1] = 1.0;
-                }
-            }
-            bool a = false;
+                    double error1 = neuralNetwork.Learn(trainingData, epoch: 61);
 
-            for (int i = 0; i < trainingData.Count; i++)
-            {
-                if (vector == trainingData[i].Item2) a = true;
-            }
-            if (!a)
-            {
-                var input = double.Parse(Console.ReadLine());
-                trainingData.Add(new Tuple<double, double[]>(input, vector));
+                    Console.WriteLine($"Ошибка после обучения: {error1}");
+                }
+                else if (text == "stop") break;
+                else
+                {
+                    Neuron outputNeuron1 = neuralNetwork.FeedForward(text, wordsData);
+                    var res = Math.Round(outputNeuron1.Output, 3);
+                    Console.WriteLine($"Классификация вопроса 1: {(res >= 0.5 ? "задача" : "вопрос о правиле")}");
+                }
             }
         }
     }

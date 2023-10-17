@@ -1,10 +1,7 @@
 ﻿using SchoolChatGPT_v1._0.NeuralNetworkClasses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SetWordsForNeuralNetwork
 {
@@ -15,63 +12,85 @@ namespace SetWordsForNeuralNetwork
         {
         };
 
-        private Data data;
-        private Dictionary<string, int> wordsData;
-        private List<Tuple<double, string>> sentencesAndValue;
-        
-        public Sentences()
+        private Data data; // Создаем экземпляр класса Data
+        private Dictionary<string, int> wordsData; // Создаем словарь для хранения слов и их значений
+        private string input;
+
+        public Sentences(string input)
         {
             data = new Data();
-            data = data.GetData();
-            
+            data = data.GetData(); // Получаем данные с помощью метода GetData() из класса Data
+            wordsData = data.wordsData;
+            trainingData = data.trainingData;
+            this.input = input;
         }
-        public List<Tuple<double,string>> SetSentences(string sentences) 
+
+        public List<Tuple<double, string>> SetSentences(string sentences)
         {
-            List < Tuple<double, string> > result = new List<Tuple<double, string>>();
+            List<Tuple<double, string>> result = new List<Tuple<double, string>>();
+
+            // Разбиваем входные предложения на части, разделенные символом ":"
             string[] arraySentensesAndValue = sentences.Split(':');
+
             for (int i = 0; i < arraySentensesAndValue.Length; i++)
             {
                 try
                 {
+                    // Разбиваем каждую часть на две части, разделенные символом "$"
                     string[] array = arraySentensesAndValue[i].Split('$');
-                    double value = int.Parse(array[0]);
-                    result.Add(new Tuple<double, string>(value, RemovePunctuation(array[i])));
+                    double value = int.Parse(array[1]); // Преобразуем вторую часть в число
+                    string sentense = RemovePunctuation(array[0]); // Удаляем пунктуацию из первой части
+                    
+                    result.Add(new Tuple<double, string>(value, sentense)); // Добавляем результат в список
+                    
                 }
-                catch 
+                catch
                 {
-                
+                    // Обработка исключения, если произошла ошибка при парсинге или других операциях
                 }
             }
-            return result;
-        }
-        public void SetQuetions()
-        {
-            var wordsOfQuetion = Console.ReadLine().Split();
-            var vector = new double[wordsData.Count];
-            for (int i = 0; i < vector.Length; i++)
-            {
-                vector[i] = 0;
-            }
-            for (int i = 0; i < wordsOfQuetion.Length; i++)
-            {
-                if (wordsData.ContainsKey(wordsOfQuetion[i]))
-                {
-                    var num = wordsData[wordsOfQuetion[i]];
-                    vector[num - 1] = 1.0;
-                }
-            }
-            bool a = false;
 
-            for (int i = 0; i < trainingData.Count; i++)
-            {
-                if (vector == trainingData[i].Item2) a = true;
-            }
-            if (!a)
-            {
-                var input = double.Parse(Console.ReadLine());
-                trainingData.Add(new Tuple<double, double[]>(input, vector));
-            }
+            return result; // Возвращаем список результатов
         }
+
+        public void SetTrainingData()
+        {
+            List<Tuple<double, string>> sentenses = SetSentences(input);
+           
+            
+            for (int i = 0; i < sentenses.Count; i++)
+            {
+                var vector = new double[wordsData.Count];
+                for (int x = 0; x < vector.Length; x++)
+                {
+                    vector[x] = 0;
+                }
+                var wordsOfQuetion = sentenses[i].Item2.Split(); // Читаем входные слова из консоли и разделяем их на части
+
+                for (int j = 0; j < wordsOfQuetion.Length; j++)
+                {
+                    if (wordsData.ContainsKey(wordsOfQuetion[j]))
+                    {
+                        var num = wordsData[wordsOfQuetion[j]]; // Получаем номер слова
+                        vector[num - 1] = 1.0;
+                    }
+                }
+
+                bool a = false;
+
+                for (int j = 0; j < trainingData.Count; j++)
+                {
+                    if (vector == trainingData[j].Item2) a = true; // Проверяем, существует ли вектор в обучающем наборе
+                }
+
+                if (!a)
+                {
+                    trainingData.Add(new Tuple<double, double[]>(sentenses[i].Item1, vector)); // Добавляем в обучающий набор
+                }
+            }
+            data.SetData(wordsData, trainingData);
+        }
+
         private string RemovePunctuation(string input)
         {
             // Используем регулярное выражение для удаления знаков препинания

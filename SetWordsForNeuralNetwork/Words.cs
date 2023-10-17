@@ -38,7 +38,7 @@ namespace SetWordsForNeuralNetwork
         {
             // Используем регулярное выражение для удаления знаков препинания
             input = Regex.Replace(input, @"[\p{P}-[.]]", string.Empty);
-
+            input = Regex.Replace(input,@"[$]",string.Empty);
             return input.Split();
         }
     }
