@@ -36,17 +36,17 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// </summary>
         public Data GetData()
         {
-           // try
+            try
             {
                 json = File.ReadAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\data.json");
                 Data data = JsonConvert.DeserializeObject<Data>(json);
                 return data;
             }
-           // catch 
-            /*{
-                SetData(new Dictionary<string, int>(), new List<Tuple<double, double[]>>(),null);
+            catch 
+            {
+                SetData(new Dictionary<string, int>() { { "Что", 1 } }, new List<Tuple<double, double[]>>());
                 return new Data();
-            }*/
+            }
         }
 
         /// <summary>

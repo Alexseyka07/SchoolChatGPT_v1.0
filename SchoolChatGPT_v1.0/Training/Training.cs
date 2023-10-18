@@ -23,14 +23,14 @@ namespace SchoolChatGPT_v1._0.Training
 
         public void TrainingNeuralNetwork()
         {
-            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 15, 5 });
+            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 20, 2});
 
             // Создаем нейронную сеть
             NeuralNetwork neuralNetwork = new NeuralNetwork(topology);
 
             // Обучаем нейронную сеть
 
-            double error = neuralNetwork.Learn(trainingData, epoch: 61);
+            double error = neuralNetwork.Learn(trainingData, epoch: 100);
 
             Console.WriteLine($"Ошибка после обучения: {error}");
 
