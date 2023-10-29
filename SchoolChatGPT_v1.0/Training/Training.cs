@@ -1,6 +1,8 @@
-﻿using SchoolChatGPT_v1._0.NeuralNetworkClasses;
+﻿using Newtonsoft.Json.Serialization;
+using SchoolChatGPT_v1._0.NeuralNetworkClasses;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace SchoolChatGPT_v1._0.Training
 {
@@ -23,14 +25,25 @@ namespace SchoolChatGPT_v1._0.Training
 
         public void TrainingNeuralNetwork()
         {
-            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 20, 2});
+
+           
+            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 30, 4});
 
             // Создаем нейронную сеть
             NeuralNetwork neuralNetwork = new NeuralNetwork(topology);
-
+            double error = 100;
             // Обучаем нейронную сеть
+            while (error > 10)
+            {
+                neuralNetwork = new NeuralNetwork(topology);
+                error = neuralNetwork.Learn(trainingData, epoch: 10);
+            }
+            while(error > 0.005)
+            {
+               
+                error = neuralNetwork.Learn(trainingData,epoch: 10);
 
-            double error = neuralNetwork.Learn(trainingData, epoch: 100);
+            }
 
             Console.WriteLine($"Ошибка после обучения: {error}");
 
@@ -39,7 +52,7 @@ namespace SchoolChatGPT_v1._0.Training
                 var text = Console.ReadLine();
                 if (text == "1")
                 {
-                    double error1 = neuralNetwork.Learn(trainingData, epoch: 61);
+                    double error1 = neuralNetwork.Learn(trainingData, epoch: 10);
 
                     Console.WriteLine($"Ошибка после обучения: {error1}");
                 }
