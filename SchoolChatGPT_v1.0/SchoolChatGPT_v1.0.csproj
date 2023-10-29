@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NeuralNetworkClasses\Data.cs" />
+    <Compile Include="NeuralNetworkClasses\DataNeuralNetwork.cs" />
     <Compile Include="NeuralNetworkClasses\Layer.cs" />
     <Compile Include="NeuralNetworkClasses\NeuralNetwork.cs" />
     <Compile Include="NeuralNetworkClasses\Neuron.cs" />

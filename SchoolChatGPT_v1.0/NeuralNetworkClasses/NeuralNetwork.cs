@@ -29,11 +29,20 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             Topology = topology;
             Layers = new List<Layer>();
-            CreateInputLayer();
+            /*CreateInputLayer();
             CreateHiddenLayers();
-            CreateOutputLayer();
+            CreateOutputLayer();*/
         }
-        
+        public NeuralNetwork()
+        {
+            Data data = new Data();
+            data = data.GetData();
+            Topology = new Topology(inputCount: data.wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 30, 4 });
+            Layers = new List<Layer>();
+            /*CreateInputLayer();
+            CreateHiddenLayers();
+            CreateOutputLayer();*/
+        }
         /// <summary>
         /// Выполняет прямое распространение сигнала через нейронную сеть.
         /// </summary>
