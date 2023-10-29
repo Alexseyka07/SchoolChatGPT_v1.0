@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolChatGPT_v1.0", "Schoo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetWordsForNeuralNetwork", "SetWordsForNeuralNetwork\SetWordsForNeuralNetwork.csproj", "{2D4767EA-1111-412E-80BD-3EB2D6F5F5F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoolChat_Beta_v1.0", "ShoolChat_Beta_v1.0\ShoolChat_Beta_v1.0.csproj", "{F69BE30B-DB7D-49E8-8D5D-3D92C0E2DCBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D4767EA-1111-412E-80BD-3EB2D6F5F5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D4767EA-1111-412E-80BD-3EB2D6F5F5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D4767EA-1111-412E-80BD-3EB2D6F5F5F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69BE30B-DB7D-49E8-8D5D-3D92C0E2DCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69BE30B-DB7D-49E8-8D5D-3D92C0E2DCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69BE30B-DB7D-49E8-8D5D-3D92C0E2DCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69BE30B-DB7D-49E8-8D5D-3D92C0E2DCBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

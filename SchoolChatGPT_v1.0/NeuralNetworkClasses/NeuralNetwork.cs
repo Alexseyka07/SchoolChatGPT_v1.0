@@ -29,9 +29,9 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             Topology = topology;
             Layers = new List<Layer>();
-            /*CreateInputLayer();
+            CreateInputLayer();
             CreateHiddenLayers();
-            CreateOutputLayer();*/
+            CreateOutputLayer();
         }
         public NeuralNetwork()
         {

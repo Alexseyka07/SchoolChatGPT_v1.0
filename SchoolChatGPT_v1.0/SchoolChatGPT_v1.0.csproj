@@ -52,6 +52,7 @@
     <Compile Include="NeuralNetworkClasses\NeuralNetwork.cs" />
     <Compile Include="NeuralNetworkClasses\Neuron.cs" />
     <Compile Include="NeuralNetworkClasses\NeuronType.cs" />
+    <Compile Include="NeuralNetworkClasses\NNMode.cs" />
     <Compile Include="NeuralNetworkClasses\Topology.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

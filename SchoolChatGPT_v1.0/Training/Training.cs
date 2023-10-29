@@ -63,7 +63,7 @@ namespace SchoolChatGPT_v1._0.Training
                 var text = Console.ReadLine();
                 if (text == "1")
                 {
-                    error = neuralNetwork.Learn(trainingData, epoch: 10);
+                    error = neuralNetwork.Learn(trainingData, epoch: 700);
 
                     Console.WriteLine($"Ошибка после обучения: {error}");
                 }
