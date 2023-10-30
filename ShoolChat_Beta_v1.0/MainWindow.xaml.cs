@@ -25,9 +25,21 @@ namespace ShoolChat_Beta_v1._0
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        
 
+        private void MagicBt_Click(object sender, RoutedEventArgs e)
+        {
+            MagicBt.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#878787"));
+
+        }
+
+        private void ChatBt_Click(object sender, RoutedEventArgs e)
+        {
+            ChatBt.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#53614E"));
+            
+            
+            
+          
         }
     }
 }
