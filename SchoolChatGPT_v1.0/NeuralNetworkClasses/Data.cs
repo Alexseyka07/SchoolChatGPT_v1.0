@@ -42,7 +42,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
                 Data data = JsonConvert.DeserializeObject<Data>(json);
                 return data;
             }
-            catch 
+            catch
             {
                 SetData(new Dictionary<string, int>() { { "Что", 1 } }, new List<Tuple<double, double[]>>());
                 return new Data();
@@ -59,14 +59,11 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             json = JsonConvert.SerializeObject(data);
             File.WriteAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\data.json", json);
         }
-        
+
         private void UpdateData(Dictionary<string, int> wordsData, List<Tuple<double, double[]>> trainingData)
         {
             this.wordsData = wordsData;
             this.trainingData = trainingData;
-            
         }
-        
-        
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
@@ -35,36 +33,34 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// </summary>
         public DataNeuralNetwork GetData()
         {
-           // try
+            // try
             {
                 json = File.ReadAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json");
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
                 return data;
             }
-           /* catch
-            {
-                SetData(new NeuralNetwork());
-                return new DataNeuralNetwork();
-            }*/
+            /* catch
+             {
+                 SetData(new NeuralNetwork());
+                 return new DataNeuralNetwork();
+             }*/
         }
 
         /// <summary>
         /// Установить данные в файл JSON.
         /// </summary>
-        public void SetData(NeuralNetwork neuralNetwork,double error)
+        public void SetData(NeuralNetwork neuralNetwork, double error)
         {
-            UpdateData(neuralNetwork,error);
+            UpdateData(neuralNetwork, error);
             DataNeuralNetwork data = this;
             json = JsonConvert.SerializeObject(data);
             File.WriteAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json", json);
         }
 
-        private void UpdateData(NeuralNetwork neuralNetwork,double error)
+        private void UpdateData(NeuralNetwork neuralNetwork, double error)
         {
             this.neuralNetwork = neuralNetwork;
             this.error = error;
         }
-
-
     }
 }

@@ -100,5 +100,8 @@
   <ItemGroup>
     <Resource Include="🦆 icon _message_ %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="🦆 icon _message_ %282%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
