@@ -22,7 +22,7 @@ namespace SchoolChatGPT_v1._0.Training
 
         public void TrainingNeuralNetwork()
         {
-            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 30, 4 });
+            Topology topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.2, layers: new int[] { 30, 4 });
 
             double error = FirstLearning(topology);
             Console.WriteLine($"Ошибка после обучения: {error}");
@@ -32,7 +32,7 @@ namespace SchoolChatGPT_v1._0.Training
                 var text = Console.ReadLine();
                 if (text == "1")
                 {
-                    error = neuralNetwork.Learn(trainingData, epoch: 10);
+                    error = neuralNetwork.Learn(trainingData, epoch: 30);
 
                     Console.WriteLine($"Ошибка после обучения: {error}");
                 }
@@ -87,11 +87,11 @@ namespace SchoolChatGPT_v1._0.Training
             while (error > 10)
             {
                 neuralNetwork = new NeuralNetwork(topology);
-                error = neuralNetwork.Learn(trainingData, epoch: 10);
+                error = neuralNetwork.Learn(trainingData, epoch: 30);
             }
             while (error > 0.005)
             {
-                error = neuralNetwork.Learn(trainingData, epoch: 10);
+                error = neuralNetwork.Learn(trainingData, epoch: 30);
             }
             return error;
         }

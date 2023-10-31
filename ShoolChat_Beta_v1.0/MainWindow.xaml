@@ -191,7 +191,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="25" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="True">
+                        <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="True">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -248,7 +248,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="25" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="true">
+                        <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -264,8 +264,8 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="#3B4430"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background3}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border3}"/>
+                                <Setter Property="Background" TargetName="border" Value="#262626"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#262626"/>
                                 <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground3}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -319,15 +319,21 @@
                     
                 </Grid.RowDefinitions>
 
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Name="MainChatSp">
+                        
+                        
+                    </StackPanel>
+                </ScrollViewer>
                 <Border Grid.Row="1" Background="#212121" BorderThickness="0,1,0,0" BorderBrush="#606060">
                     <Grid Margin="20">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80*"/>
-                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="90*"/>
+                            <ColumnDefinition Width="10*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Margin="0,0,10,0" Style="{DynamicResource TextBoxStyle666}" TextWrapping="Wrap" FontSize="15" Background="#595959" Padding="15"/>
-                        <Button Style="{DynamicResource ButtonStyle2}" Grid.Column="1"  Margin="10,0,0,0" Background="#616D51">
-                            <Image Source="/🦆 icon _message_ (2).png" Margin="20"/>
+                        <TextBox x:Name="MessageTb" Text="Введите сообщение..." Grid.Column="0" KeyDown="MessageTb_KeyDown" GotFocus="MessageTb_GotFocus" Margin="0,0,5,0" TextChanged="MessageTb_TextChanged" Style="{DynamicResource TextBoxStyle666}" TextWrapping="Wrap" Foreground="White" FontSize="15" Background="#595959" Padding="15"/>
+                        <Button x:Name="MessageBt"  Style="{DynamicResource ButtonStyle2}" Grid.Column="1"  Margin="5,0,0,0" Background="#616D51" IsEnabled="False" Click="MessageBt_Click" >
+                            <Image Source="/🦆 icon _message_ (2).png" Margin="10"/>
                         </Button>
                     </Grid>
                    

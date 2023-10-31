@@ -33,17 +33,17 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// </summary>
         public DataNeuralNetwork GetData()
         {
-            // try
+             try
             {
                 json = File.ReadAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json");
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
                 return data;
             }
-            /* catch
+             catch
              {
-                 SetData(new NeuralNetwork());
+                 SetData(new NeuralNetwork(),100);
                  return new DataNeuralNetwork();
-             }*/
+             }
         }
 
         /// <summary>
