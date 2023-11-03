@@ -20,16 +20,21 @@ namespace ShoolChat_Beta_v1._0
     {
         private event Action<object,EventArgs> SendMessageChanged;
         private NeuralNetwork neuralNetwork;
-        Dictionary<string, int> wordsData;
-        private List<StackPanel> chats = new List<StackPanel>();
-        private StackPanel actualChat;
+        private Dictionary<string, int> wordsData;
+
+       
+        private List<List<string>> chatsList;
+        private int actualIndexChat = 0;
 
         public MainWindow()
         {
             InitializeComponent();
             InitNeuralNetwork();
             SendMessageChanged += SendMessage;
+
             
+            Grid startMessage = getGPTMessage("Привет, друг! Рад тебя видеть в этом приложении. Чтобы я начал творить магию, нажми на кнопку <<НОВЫЙ ЧАТ>>\n<---------------");
+            MainChatSp.Children.Add(startMessage);
         }
 
         private void MagicBt_Click(object sender, RoutedEventArgs e)
@@ -47,11 +52,27 @@ namespace ShoolChat_Beta_v1._0
             Button button = sender as Button;
             button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#53614E"));
             button.IsEnabled = false;
+            actualIndexChat = int.Parse(button.Name.Split('_')[1]);
+            MainChatSp.Children.Clear();
+            for (int i = 0; i < chatsList[actualIndexChat].Count; i++)
+            {
+                if(i%2 == 0)
+                {
+                    Grid userWindow = GetUserMessage(chatsList[actualIndexChat][i]);
+                    MainChatSp.Children.Add(userWindow);
+                }
+                else
+                {
+                    Grid gptAnswer = getGPTMessage(chatsList[actualIndexChat][i]);
+                    MainChatSp.Children.Add(gptAnswer);
+                }
+            }
         }
 
         private void NewChatBt_Click(object sender, RoutedEventArgs e)
         {
            Button chatBt = InitChatButton();
+            
             foreach (Button buttonChildren in ChatsSp.Children)
             {
                 buttonChildren.IsEnabled = true;
@@ -59,13 +80,13 @@ namespace ShoolChat_Beta_v1._0
             }            
             chatBt.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#53614E"));
             chatBt.IsEnabled = false;
-            StackPanel chat = new StackPanel();
-            actualChat = chat;
             ChatsSp.Children.Add(chatBt);
-            actualChat.Background = Brushes.Red;
-          
-
-
+            List<string> chat = new List<string>();
+            chatsList.Add(chat);
+            chatBt.Name = $"chatBt_{chatsList.Count - 1}";
+            actualIndexChat = int.Parse(chatBt.Name.Split('_')[1]);
+            MainChatSp.Children.Clear();
+            MessageTb_TextChanged(MessageTb, null);
 
         }
 
@@ -126,10 +147,12 @@ namespace ShoolChat_Beta_v1._0
         private void MessageTb_KeyDown(object sender, KeyEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            if (e.Key == Key.Enter && textBox.Text != "")
+            if (e.Key == Key.Enter && textBox.Text != "" && ChatsSp.Children.Count != 0)
             {
+               
                 // Выполните здесь ваше событие
                 SendMessageChanged(sender,null);
+                
                 e.Handled = true; // Чтобы предотвратить добавление новой строки
                 
             }
@@ -138,7 +161,7 @@ namespace ShoolChat_Beta_v1._0
         private void MessageTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            if (textBox.Text != "" && textBox.Text != "Введите сообщение...")
+            if (textBox.Text != "" && textBox.Text != "Введите сообщение..." && ChatsSp.Children.Count != 0)
             {
                 MessageBt.IsEnabled = true;
             }
@@ -157,15 +180,15 @@ namespace ShoolChat_Beta_v1._0
             
             string message = textBox.Text;
             textBox.Text = string.Empty;
-            Grid grid = InitUserMessage(message);
-            actualChat.Children.Add(grid);
-            Grid grid1 = InitGPTMessage(message);
-            actualChat.Children.Add(grid1);
-            Grid gr3 = actualChat.Children[0] as Grid;
-            MainChatSp.Children.Add(grid1);
+            Grid userWindow = InitUserMessage(message);
+            MainChatSp.Children.Add(userWindow);
+            Grid gptWindow = InitGPTMessage(message);
+            MainChatSp.Children.Add(gptWindow);
+           
         }
         private Grid InitUserMessage(string message)
         {
+            chatsList[actualIndexChat].Add(message);
             Grid grid = new Grid();
             ColumnDefinition col1 = new ColumnDefinition();
             col1.Width = new GridLength(70, GridUnitType.Star);
@@ -197,6 +220,39 @@ namespace ShoolChat_Beta_v1._0
 
             return grid;
         }
+        private Grid GetUserMessage(string message)
+        {
+            Grid grid = new Grid();
+            ColumnDefinition col1 = new ColumnDefinition();
+            col1.Width = new GridLength(70, GridUnitType.Star);
+            ColumnDefinition col2 = new ColumnDefinition();
+            col2.Width = new GridLength(30, GridUnitType.Star);
+            grid.ColumnDefinitions.Add(col1);
+            grid.ColumnDefinitions.Add(col2);
+            Border border = new Border
+            {
+                CornerRadius = new CornerRadius(15),
+                Height = 70,
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#616D51")),
+                Margin = new Thickness(20, 20, 20, 10)
+            };
+
+            TextBlock label = new TextBlock
+            {
+                Text = message, // Замените это на ваш текст
+                Foreground = Brushes.White, // Цвет текста
+                Padding = new Thickness(10),
+                FontSize = 15,
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            border.Child = label;
+            grid.Children.Add(border);
+            Grid.SetColumn(border, 0); // Укажите столбец, в котором разместить Border
+
+
+            return grid;
+        }
         private Grid InitGPTMessage(string message)
         {
             
@@ -217,11 +273,48 @@ namespace ShoolChat_Beta_v1._0
 
             Func<string, string> func = GPTWork;
             IAsyncResult result = func.BeginInvoke(message,null,null);
-            string mes = func.EndInvoke(result);
+            string gptAnswer = func.EndInvoke(result);
+            chatsList[actualIndexChat].Add(gptAnswer);
             TextBlock label = new TextBlock
             {
-               Text  = mes, // Замените это на ваш текст
+               Text  = gptAnswer, // Замените это на ваш текст
                Foreground = Brushes.White, // Цвет текста
+                Padding = new Thickness(10),
+                FontSize = 15,
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            border.Child = label;
+            grid.Children.Add(border);
+            Grid.SetColumn(border, 1); // Укажите столбец, в котором разместить Border
+
+
+            return grid;
+        }
+        private Grid getGPTMessage(string message)
+        {
+
+            Grid grid = new Grid();
+            ColumnDefinition col1 = new ColumnDefinition();
+            col1.Width = new GridLength(30, GridUnitType.Star);
+            ColumnDefinition col2 = new ColumnDefinition();
+            col2.Width = new GridLength(70, GridUnitType.Star);
+            grid.ColumnDefinitions.Add(col1);
+            grid.ColumnDefinitions.Add(col2);
+            Border border = new Border
+            {
+                CornerRadius = new CornerRadius(15),
+                Height = 70,
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5E4747")),
+                Margin = new Thickness(20, 20, 20, 10)
+            };
+
+           
+            
+            TextBlock label = new TextBlock
+            {
+                Text = message, // Замените это на ваш текст
+                Foreground = Brushes.White, // Цвет текста
                 Padding = new Thickness(10),
                 FontSize = 15,
                 TextWrapping = TextWrapping.Wrap

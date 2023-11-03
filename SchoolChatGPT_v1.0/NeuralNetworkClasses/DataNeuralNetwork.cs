@@ -35,14 +35,14 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
              try
             {
-                json = File.ReadAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json");
+                json = File.ReadAllText(@"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json");
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
                 return data;
             }
              catch
              {
                  SetData(new NeuralNetwork(),100);
-                 return new DataNeuralNetwork();
+                 return this;
              }
         }
 
@@ -54,7 +54,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             UpdateData(neuralNetwork, error);
             DataNeuralNetwork data = this;
             json = JsonConvert.SerializeObject(data);
-            File.WriteAllText(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json", json);
+            File.WriteAllText(@"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json", json);
         }
 
         private void UpdateData(NeuralNetwork neuralNetwork, double error)
