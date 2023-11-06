@@ -11,6 +11,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public NeuralNetwork neuralNetwork;
         public double error;
         private string json;
+        private string path;
 
         /// <summary>
         /// Конструктор класса Data, инициализирующий объект Data с предоставленными данными.
@@ -18,6 +19,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public DataNeuralNetwork(NeuralNetwork neuralNetwork)
         {
             this.neuralNetwork = neuralNetwork;
+            path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
         }
 
         /// <summary>
@@ -26,6 +28,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public DataNeuralNetwork()
         {
             this.neuralNetwork = null;
+            path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
         }
 
         /// <summary>
@@ -33,9 +36,10 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// </summary>
         public DataNeuralNetwork GetData()
         {
+            
              try
             {
-                json = File.ReadAllText(@"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json");
+                json = File.ReadAllText(path);
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
                 return data;
             }
@@ -54,7 +58,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             UpdateData(neuralNetwork, error);
             DataNeuralNetwork data = this;
             json = JsonConvert.SerializeObject(data);
-            File.WriteAllText(@"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\dataNeuralnetwork.json", json);
+            File.WriteAllText(path, json);
         }
 
         private void UpdateData(NeuralNetwork neuralNetwork, double error)

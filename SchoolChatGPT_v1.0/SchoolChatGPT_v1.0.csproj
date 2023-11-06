@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NeuralNetworkClasses\AppPath.cs" />
     <Compile Include="NeuralNetworkClasses\Data.cs" />
     <Compile Include="NeuralNetworkClasses\DataNeuralNetwork.cs" />
     <Compile Include="NeuralNetworkClasses\Layer.cs" />

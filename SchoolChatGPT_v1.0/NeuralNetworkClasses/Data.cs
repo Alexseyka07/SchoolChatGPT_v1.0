@@ -13,7 +13,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public Dictionary<string, int> wordsData;
         public List<Tuple<double, double[]>> trainingData;
         private string json;
-
+        private string path;
         /// <summary>
         /// Конструктор класса Data, инициализирующий объект Data с предоставленными данными.
         /// </summary>
@@ -21,6 +21,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             this.wordsData = wordsData;
             this.trainingData = trainingData;
+            path = Path.Combine(AppPath.GetPath(), "data.json");
         }
 
         /// <summary>
@@ -29,6 +30,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public Data()
         {
             this.wordsData = null;
+            path = Path.Combine(AppPath.GetPath(), "data.json");
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             try
             {
-                json = File.ReadAllText(@"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\data.json");
+                json = File.ReadAllText(path);
                 Data data = JsonConvert.DeserializeObject<Data>(json);
                 return data;
             }
@@ -57,7 +59,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             UpdateData(wordsData, trainingData);
             Data data = this;
             json = JsonConvert.SerializeObject(data);
-            File.WriteAllText(@"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0\SchoolChatGPT_v1.0\data.json", json);
+            File.WriteAllText(path, json);
         }
 
         private void UpdateData(Dictionary<string, int> wordsData, List<Tuple<double, double[]>> trainingData)

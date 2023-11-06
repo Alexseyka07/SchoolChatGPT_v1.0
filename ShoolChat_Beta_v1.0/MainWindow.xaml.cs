@@ -21,9 +21,9 @@ namespace ShoolChat_Beta_v1._0
         private event Action<object,EventArgs> SendMessageChanged;
         private NeuralNetwork neuralNetwork;
         private Dictionary<string, int> wordsData;
+        
 
-       
-        private List<List<string>> chatsList;
+        private List<List<string>> chatsList = new List<List<string>>();
         private int actualIndexChat = 0;
 
         public MainWindow()
