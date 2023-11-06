@@ -21,7 +21,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             this.wordsData = wordsData;
             this.trainingData = trainingData;
-            path = Path.Combine(AppPath.GetPath(), "data.json");
+            //path = Path.Combine(AppPath.GetPath(), "data.json");
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public Data()
         {
             this.wordsData = null;
-            path = Path.Combine(AppPath.GetPath(), "data.json");
+           // path = Path.Combine(AppPath.GetPath(), "data.json");
         }
 
         /// <summary>

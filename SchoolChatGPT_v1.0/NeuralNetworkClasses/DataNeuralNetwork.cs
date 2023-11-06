@@ -19,7 +19,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public DataNeuralNetwork(NeuralNetwork neuralNetwork)
         {
             this.neuralNetwork = neuralNetwork;
-            path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
+           // path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public DataNeuralNetwork()
         {
             this.neuralNetwork = null;
-            path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
+            //path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
         }
 
         /// <summary>

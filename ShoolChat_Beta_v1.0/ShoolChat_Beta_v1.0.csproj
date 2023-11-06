@@ -66,6 +66,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\Chat.cs" />
+    <Compile Include="classes\NeuralNetworkGPT.cs" />
+    <Compile Include="classes\Topology.cs" />
     <Compile Include="DataChats.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

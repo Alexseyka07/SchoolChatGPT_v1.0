@@ -9,10 +9,12 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
 {
     public static class AppPath
     {
-        static string path = AppDomain.CurrentDomain.BaseDirectory;
-        public static string GetPath()
+        public static string PathApp { get; private set; }
+
+        public static void SetPath(string path)
         {
-            return path;
+            PathApp = path;
         }
+        
     }
 }
