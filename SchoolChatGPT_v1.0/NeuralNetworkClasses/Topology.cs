@@ -51,7 +51,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             LearningRate = learningRate;
             HiddenLayers = new List<int>();
             HiddenLayers.AddRange(layers);
-            Data = new Data();
+            Data = new Data("data");
             Data = Data.GetData();
             TrainingData = Data.trainingData;
             WordsData = Data.wordsData;
@@ -68,7 +68,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             LearningRate = learningRate;
             HiddenLayers = new List<int>();
             HiddenLayers.AddRange(layers);
-            Data = new Data();
+            Data = new Data("data");
             Data = Data.GetData();
             TrainingData = trainingData;
             WordsData = wordsData;

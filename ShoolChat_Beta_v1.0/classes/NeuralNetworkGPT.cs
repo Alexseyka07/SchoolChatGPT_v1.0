@@ -1,14 +1,6 @@
 ﻿using SchoolChatGPT_v1._0.NeuralNetworkClasses;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
 
 namespace ShoolChat_Beta_v1._0.classes
 {
@@ -18,29 +10,28 @@ namespace ShoolChat_Beta_v1._0.classes
         private Dictionary<string, int> wordsData;
         private Data data;
         private DataNeuralNetwork dataNeuralNetwork;
+        private Topology topology; 
 
-        public NeuralNetworkGPT() 
+        public NeuralNetworkGPT()
         {
-            dataNeuralNetwork = new DataNeuralNetwork();
-            data = new Data();
+            data = new Data("data");
             data = data.GetData();
             wordsData = data.wordsData;
-            neuralNetwork = dataNeuralNetwork.neuralNetwork;
+            topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.2, layers: new int[] { 30, 4 });
+            dataNeuralNetwork = new DataNeuralNetwork("dataNeuralNetwork11", topology);
+            neuralNetwork = dataNeuralNetwork.GetData();
         }
 
         private string GPTWorkAction(string message)
         {
+            string answer = "error";
 
-            string answer = "null";
-            if (TopologyApp.PathApp != null)
-            {
-                Neuron outputNeuron1 = neuralNetwork.FeedForward(message, wordsData);
-                var res = Math.Round(outputNeuron1.Output, 3);
-                answer += $"       \n {(res >= 0.5 ? "задача" : "вопрос о правиле")}";
-                return answer;
-            }
+            Neuron outputNeuron = neuralNetwork.FeedForward(message, wordsData);
+            var res = Math.Round(outputNeuron.Output, 3);
+            answer = $"{(res >= 0.5 ? "задача" : "вопрос о правиле")}";
             return answer;
         }
+
         public string GPTWork(string message)
         {
             Func<string, string> func = GPTWorkAction;

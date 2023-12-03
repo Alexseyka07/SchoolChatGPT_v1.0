@@ -1,5 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using Settings;
 
 namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
 {
@@ -8,63 +11,60 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
     /// </summary>
     public class DataNeuralNetwork
     {
-        public NeuralNetwork neuralNetwork;
-        public double error;
-        private string json;
+        private Topology topology;
         private string path;
+        private string name;
+        private string json;
+        public List<Layer> Layers { get; set; }
 
-        /// <summary>
-        /// Конструктор класса Data, инициализирующий объект Data с предоставленными данными.
-        /// </summary>
-        public DataNeuralNetwork(NeuralNetwork neuralNetwork)
-        {
-            this.neuralNetwork = neuralNetwork;
-           // path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
-        }
+
 
         /// <summary>
         /// Пустой конструктор класса Data.
         /// </summary>
-        public DataNeuralNetwork()
+        public DataNeuralNetwork(string name, Topology topology)
         {
-            this.neuralNetwork = null;
-            //path = Path.Combine(AppPath.GetPath(), "dataNeuralnetwork.json");
+            this.topology = topology;
+            this.name = name;
+            path = Path.Combine(Settings.Settings.AppPath, $"{name}.json");
         }
 
         /// <summary>
         /// Получить данные из файла JSON.
         /// </summary>
-        public DataNeuralNetwork GetData()
+        public NeuralNetwork GetData()
         {
-            
-             try
+           // try
             {
                 json = File.ReadAllText(path);
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
-                return data;
+                List<Layer> layers = data.Layers;
+                NeuralNetwork neuralNetwork = new NeuralNetwork(topology, layers);
+                return neuralNetwork;
             }
-             catch
-             {
-                 SetData(new NeuralNetwork(),100);
-                 return this;
-             }
+           /* catch
+            {
+                NeuralNetwork neuralNetwork = new NeuralNetwork();
+                SetData(neuralNetwork);
+                return neuralNetwork;
+            }*/
         }
 
         /// <summary>
         /// Установить данные в файл JSON.
         /// </summary>
-        public void SetData(NeuralNetwork neuralNetwork, double error)
+        public void SetData(List<Layer> layers)
         {
-            UpdateData(neuralNetwork, error);
+            UpdateData(layers);
+
             DataNeuralNetwork data = this;
             json = JsonConvert.SerializeObject(data);
             File.WriteAllText(path, json);
         }
 
-        private void UpdateData(NeuralNetwork neuralNetwork, double error)
+        private void UpdateData(List<Layer> layers)
         {
-            this.neuralNetwork = neuralNetwork;
-            this.error = error;
+            Layers = layers;
         }
     }
 }

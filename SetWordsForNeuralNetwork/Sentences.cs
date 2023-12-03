@@ -18,7 +18,7 @@ namespace SetWordsForNeuralNetwork
 
         public Sentences(string input)
         {
-            data = new Data();
+            data = new Data("data");
             data = data.GetData(); // Получаем данные с помощью метода GetData() из класса Data
             wordsData = data.wordsData;
             trainingData = data.trainingData;

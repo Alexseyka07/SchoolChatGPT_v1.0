@@ -7,7 +7,7 @@ namespace SetWordsForNeuralNetwork
 {
     public class Words
     {
-        private Data data = new Data();
+        private Data data = new Data("data");
         private Dictionary<string, int> wordsData;
 
         public Words()

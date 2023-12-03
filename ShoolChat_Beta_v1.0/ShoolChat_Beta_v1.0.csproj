@@ -119,6 +119,10 @@
       <Project>{4195d69e-193d-4d9c-99d4-b0cb5ab3f64e}</Project>
       <Name>SchoolChatGPT_v1.0</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Settings\Settings.csproj">
+      <Project>{aedaa1f7-527a-4c55-9bcd-4a10738e01da}</Project>
+      <Name>Settings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

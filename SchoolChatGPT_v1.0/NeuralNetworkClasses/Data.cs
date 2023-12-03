@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
 {
     /// <summary>
@@ -14,23 +15,18 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public List<Tuple<double, double[]>> trainingData;
         private string json;
         private string path;
-        /// <summary>
-        /// Конструктор класса Data, инициализирующий объект Data с предоставленными данными.
-        /// </summary>
-        public Data(Dictionary<string, int> wordsData, List<Tuple<double, double[]>> trainingData)
-        {
-            this.wordsData = wordsData;
-            this.trainingData = trainingData;
-            //path = Path.Combine(AppPath.GetPath(), "data.json");
-        }
+        private string name;
+       
 
         /// <summary>
         /// Пустой конструктор класса Data.
         /// </summary>
-        public Data()
+        [JsonConstructor]
+        public Data(string name)
         {
             this.wordsData = null;
-           // path = Path.Combine(AppPath.GetPath(), "data.json");
+            this.name = name;
+            path = Path.Combine(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0", "data.json");
         }
 
         /// <summary>
@@ -47,7 +43,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             catch
             {
                 SetData(new Dictionary<string, int>() { { "Что", 1 } }, new List<Tuple<double, double[]>>());
-                return new Data();
+                return new Data("data");
             }
         }
 

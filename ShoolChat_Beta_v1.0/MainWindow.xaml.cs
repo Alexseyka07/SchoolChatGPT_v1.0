@@ -21,7 +21,7 @@ namespace ShoolChat_Beta_v1._0
 
         public MainWindow()
         {
-            if (TopologyApp.PathApp != null)
+            //if (TopologyApp.PathApp != null)
             {
                 TopologyApp.InitializeNeuralNetwork();
             }

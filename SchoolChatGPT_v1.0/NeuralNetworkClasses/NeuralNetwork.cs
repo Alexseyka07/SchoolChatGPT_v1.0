@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -14,12 +15,12 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// <summary>
         /// Топология нейронной сети.
         /// </summary>
-        public Topology Topology { get; }
+        public Topology Topology { get; set; }
 
         /// <summary>
         /// Список слоев нейронов.
         /// </summary>
-        public List<Layer> Layers { get; }
+        public List<Layer> Layers { get; set; }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса NeuralNetwork с указанной топологией.
@@ -33,15 +34,12 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             CreateHiddenLayers();
             CreateOutputLayer();
         }
-        public NeuralNetwork()
+
+        public NeuralNetwork(Topology topology, List<Layer> layers)
         {
-            Data data = new Data();
-            data = data.GetData();
-            Topology = new Topology(inputCount: data.wordsData.Count, outputCount: 1, learningRate: 0.4, layers: new int[] { 30, 4 });
+            Topology = topology;
             Layers = new List<Layer>();
-            /*CreateInputLayer();
-            CreateHiddenLayers();
-            CreateOutputLayer();*/
+            Layers = layers;
         }
         /// <summary>
         /// Выполняет прямое распространение сигнала через нейронную сеть.
@@ -50,7 +48,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// <returns>Выходной нейрон (или нейроны) сети.</returns>
         public Neuron FeedForward(string inputSignalsText, Dictionary<string, int> vocabulary)
         {
-           
+
             var inputSignals = VectorizeText(inputSignalsText);
             SendSignalsToInputNeurons(inputSignals);
             FeedForwardAddLayersAfterInput();
@@ -74,7 +72,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
                 return Layers.Last().Neurons.OrderByDescending(n => n.Output).First();
             return Layers.Last().Neurons[0];
         }
-       
+
 
         /// <summary>
         /// Обучает нейронную сеть на обучающем наборе данных.
@@ -86,8 +84,8 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             var error = 0.0;
             var num = 0;
-            
-            Console.WriteLine("Эпох пройденно:"); 
+
+            Console.WriteLine("Эпох пройденно:");
             for (int i = 0; i < epoch; i++)
             {
                 foreach (var data in dataSet)
@@ -95,19 +93,19 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
                     error += BackPropagation(data.Item1, data.Item2);
                 }
                 num++;
-                
+
                 Console.SetCursorPosition(0, Console.CursorTop);
-                Console.Write($" Загружено: {CalculatePercentage(num,epoch)}%");
+                Console.Write($" Загружено: {CalculatePercentage(num, epoch)}%");
             }
             Console.WriteLine();
             return error / epoch;
         }
-        
+
         static double CalculatePercentage(double number, double total)
         {
 
-            return(number / total) * 100;
-          
+            return (number / total) * 100;
+
         }
         /// <summary>
         /// Выполняет обратное распространение ошибки (обучение) для заданного обучающего примера.
