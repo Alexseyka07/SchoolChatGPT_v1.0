@@ -174,35 +174,35 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5" />
         <Style x:Key="TextBoxStyle666" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -211,10 +211,10 @@
             <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                        <Condition Property="IsSelectionActive" Value="false"/>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                        <Condition Property="IsSelectionActive" Value="false" />
                     </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
@@ -222,51 +222,51 @@
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background3" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border3" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background3" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border3" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background3" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border3" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background3" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border3" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground3" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.Static.Background3" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border3" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background3" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border3" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background3" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border3" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background3" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border3" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground3" Color="#FF838383" />
         <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual3}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background3}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border3}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual3}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background3}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border3}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Background" TargetName="border" Value="#616D51"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#616D51"/>
+                                <Setter Property="Background" TargetName="border" Value="#616D51" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#616D51" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#3B4430"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#3B4430"/>
+                                <Setter Property="Background" TargetName="border" Value="#3B4430" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#3B4430" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="#262626"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#262626"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground3}"/>
+                                <Setter Property="Background" TargetName="border" Value="#262626" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#262626" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground3}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -285,61 +285,88 @@
         <Border Grid.Row="0" Background="#2C2C2C">
             <Label Content="SchoolChat GPT" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White" />
         </Border>
-        <Grid Grid.Row="1" Background="#3A3A3A">
+        <Grid x:Name="WindowsBar_Grid"  Grid.Row="1" Background="#3A3A3A">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25*" />
                 <ColumnDefinition Width="25*" />
                 <ColumnDefinition Width="25*" />
                 <ColumnDefinition Width="25*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="MagicBt" Style="{DynamicResource ButtonStyleCR}" Background="#191919" Content="Магия" FontSize="15" Foreground="White" Click="MagicBt_Click" />
+            <Button Grid.Column="0" x:Name="MagicBt" Style="{DynamicResource ButtonStyleCR}" Background="#878787" Content="Магия" FontSize="15" Foreground="White" Click="MagicBt_Click" />
+            <Button Grid.Column="1" x:Name="LearningBt" Style="{DynamicResource ButtonStyleCR}" Background="#191919" Content="Обучение" FontSize="15" Foreground="White" Click="LearningBt_Click" />
         </Grid>
-        <Grid Grid.Row="2" Background="#212121">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25*" />
-                <ColumnDefinition Width="75*" />
-            </Grid.ColumnDefinitions>
-            <Border Background="#2C2C2C">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <Grid>
+        <TabControl x:Name="AppWindowTabControl" Grid.Row="2" SelectedItem="1"  BorderThickness="0" Background="#212121" SelectionChanged="AppWindowTabControl_SelectionChanged">
+            <TabItem x:Name="Tab1" Visibility="Collapsed">
+                <Grid Background="#212121">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="75*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#2C2C2C">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="6*" />
+                                    <RowDefinition Height="94*" />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0" Style="{DynamicResource ButtonNewChat}" x:Name="NewChatBt" Click="NewChatBt_Click" Margin="5,10,5,10" Content="Новый чат +" HorizontalContentAlignment="Center"  FontSize="15" Foreground="White"    Height="40" Background="#2C2C2C" />
+                                <StackPanel Grid.Row="1" x:Name="ChatsSp"  Margin="5">
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                    <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="6*" />
-                            <RowDefinition Height="94*" />
+                            <RowDefinition Height="74.77*" />
+                            <RowDefinition Height="25.23*" />
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Style="{DynamicResource ButtonNewChat}" x:Name="NewChatBt" Click="NewChatBt_Click" Margin="5,10,5,10" Content="Новый чат +" HorizontalContentAlignment="Center"  FontSize="15" Foreground="White"    Height="40" Background="#2C2C2C" />
-                        <StackPanel Grid.Row="1" x:Name="ChatsSp"  Margin="5">
-                        </StackPanel>
-                    </Grid>
-                </ScrollViewer>
-            </Border>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="74.77*"/>
-                    <RowDefinition Height="25.23*"/>
-                    
-                </Grid.RowDefinitions>
 
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <StackPanel Name="MainChatSp">
-                        
-                        
-                    </StackPanel>
-                </ScrollViewer>
-                <Border Grid.Row="1" Background="#212121" BorderThickness="0,1,0,0" BorderBrush="#606060">
-                    <Grid Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="90*"/>
-                            <ColumnDefinition Width="10*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="MessageTb" Text="Введите сообщение..." Grid.Column="0" KeyDown="MessageTb_KeyDown" GotFocus="MessageTb_GotFocus" Margin="0,0,5,0" TextChanged="MessageTb_TextChanged" Style="{DynamicResource TextBoxStyle666}" TextWrapping="Wrap" Foreground="White" FontSize="15" Background="#595959" Padding="15"/>
-                        <Button x:Name="MessageBt"  Style="{DynamicResource ButtonStyle2}" Grid.Column="1"  Margin="5,0,0,0" Background="#616D51" IsEnabled="False" Click="MessageBt_Click" >
-                            <Image Source="/🦆 icon _message_ (2).png" Margin="10"/>
-                        </Button>
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                            <StackPanel Name="MainChatSp">
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Border Grid.Row="1" Background="#212121" BorderThickness="0,1,0,0" BorderBrush="#606060">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90*" />
+                                    <ColumnDefinition Width="10*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="MessageTb" Text="Введите сообщение..." Grid.Column="0" KeyDown="MessageTb_KeyDown" GotFocus="MessageTb_GotFocus" Margin="0,0,5,0" TextChanged="MessageTb_TextChanged" Style="{DynamicResource TextBoxStyle666}" TextWrapping="Wrap" Foreground="White" FontSize="15" Background="#595959" Padding="15" />
+                                <Button x:Name="MessageBt"  Style="{DynamicResource ButtonStyle2}" Grid.Column="1"  Margin="5,0,0,0" Background="#616D51" IsEnabled="False" Click="MessageBt_Click">
+                                    <Image Source="/🦆 icon _message_ (2).png" Margin="10" />
+                                </Button>
+                            </Grid>
+                        </Border>
                     </Grid>
-                   
-                </Border>
-            </Grid>
-        </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Tab2" Visibility="Collapsed">
+                <Grid Background="#212121">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="75*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#2C2C2C">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+
+                            <StackPanel Grid.Row="1" x:Name="Menu_StackPanel"  Margin="5">
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="74.77*" />
+                            <RowDefinition Height="25.23*" />
+                        </Grid.RowDefinitions>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                            <StackPanel Name="Ma">
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
         <Grid Grid.Row="3" Background="#2C2C2C">
             <Label Content="ALEXPRODUCT" VerticalAlignment="Center" Foreground="#959595" HorizontalAlignment="Left" />
             <Label Content="beta v1.0" VerticalAlignment="Center" Foreground="#959595" HorizontalAlignment="Right" />

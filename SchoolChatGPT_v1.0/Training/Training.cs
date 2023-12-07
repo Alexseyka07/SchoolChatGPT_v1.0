@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using static System.Net.Mime.MediaTypeNames;
+using System.Threading;
 
 namespace SchoolChatGPT_v1._0.Training
 {
@@ -13,6 +14,7 @@ namespace SchoolChatGPT_v1._0.Training
         private NeuralNetwork neuralNetwork;
         Topology topology;
         DataNeuralNetwork dataNeuralNetwork;
+        double error;
 
         public Training()
         {
@@ -29,10 +31,17 @@ namespace SchoolChatGPT_v1._0.Training
             double error = FirstLearning(topology);
             Console.WriteLine($"Ошибка после обучения: {error}");
 
+            Thread thread = new Thread(Working);
+            thread.Start();
+
+
+        }
+        private void Working()
+        {
             while (true)
             {
                 var text = Console.ReadLine();
-                if (text == "1")
+                if (text == "l")
                 {
                     error = neuralNetwork.Learn(trainingData, epoch: 30);
 
@@ -56,7 +65,6 @@ namespace SchoolChatGPT_v1._0.Training
         {
             neuralNetwork = dataNeuralNetwork.GetData();
 
-            double error;
             while (true)
             {
                 var text = Console.ReadLine();
@@ -94,7 +102,7 @@ namespace SchoolChatGPT_v1._0.Training
             Console.WriteLine("Этап 2");
             while (error > 0.005)
             {
-                error = neuralNetwork.Learn(trainingData, epoch: 30);
+                error = neuralNetwork.Learn(trainingData, epoch: 100);
             }
             return error;
         }

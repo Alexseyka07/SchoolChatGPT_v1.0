@@ -26,16 +26,34 @@ namespace ShoolChat_Beta_v1._0
                 TopologyApp.InitializeNeuralNetwork();
             }
             InitializeComponent();
+            
 
             //Magic window
             style = (Style)FindResource("ButtonLeftPanel");
-            chat = new Chat(ChatsSp, MainChatSp, MessageBt, MessageTb, style);
+           chat = new Chat(ChatsSp, MainChatSp, MessageBt, MessageTb, style);
         }
 
         #region Magic_Window   
         private void MagicBt_Click(object sender, RoutedEventArgs e)
         {
-            MagicBt.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#878787"));
+            if (AppWindowTabControl.SelectedIndex != 0)
+            {
+                MagicBt.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#878787"));
+                Button activeButton = (Button)WindowsBar_Grid.Children[AppWindowTabControl.SelectedIndex];
+                activeButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#191919"));
+                AppWindowTabControl.SelectedIndex = 0;
+            }
+        }
+
+        private void LearningBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppWindowTabControl.SelectedIndex != 1)
+            {
+                LearningBt.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#878787"));
+                Button activeButton = (Button)WindowsBar_Grid.Children[AppWindowTabControl.SelectedIndex]; 
+                activeButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#191919"));
+                AppWindowTabControl.SelectedIndex = 1;
+            }
         }
 
         private void ChatBt_Click(object sender, RoutedEventArgs e)
@@ -68,6 +86,12 @@ namespace ShoolChat_Beta_v1._0
         {
             chat.MessageBt_Click(sender, e);
         }
-        #endregion  
+
+        #endregion
+
+        private void AppWindowTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
