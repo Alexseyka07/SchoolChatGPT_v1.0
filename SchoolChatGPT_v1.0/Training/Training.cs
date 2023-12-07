@@ -15,6 +15,8 @@ namespace SchoolChatGPT_v1._0.Training
         Topology topology;
         DataNeuralNetwork dataNeuralNetwork;
         double error;
+        double learningRate = 0.2;
+        int epochCount = 0;
 
         public Training()
         {
@@ -22,13 +24,13 @@ namespace SchoolChatGPT_v1._0.Training
             data = data.GetData();
             trainingData = data.trainingData;
             wordsData = data.wordsData;
-            topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: 0.2, layers: new int[] { 30, 4 });
+            topology = new Topology(inputCount: wordsData.Count, outputCount: 1, learningRate: learningRate, layers: new int[] { 30, 4 });
             dataNeuralNetwork = new DataNeuralNetwork("dataNeuralnetwork11", topology);
         }
 
         public void TrainingNeuralNetwork()
         {           
-            double error = FirstLearning(topology);
+            error = FirstLearning(topology);
             Console.WriteLine($"Ошибка после обучения: {error}");
 
             Thread thread = new Thread(Working);
@@ -43,14 +45,14 @@ namespace SchoolChatGPT_v1._0.Training
                 var text = Console.ReadLine();
                 if (text == "l")
                 {
-                    error = neuralNetwork.Learn(trainingData, epoch: 30);
+                    error = neuralNetwork.Learn(trainingData, epoch: AddEpoch(30));
 
                     Console.WriteLine($"Ошибка после обучения: {error}");
                 }
                 else if (text == "stop") break;
                 else if (text == "s")
                 {
-                    dataNeuralNetwork.SetData(neuralNetwork.Layers);
+                    dataNeuralNetwork.SetData(neuralNetwork.Layers, error, learningRate, epochCount);
                     Console.WriteLine("Save finish");
                 }
                 else
@@ -64,20 +66,23 @@ namespace SchoolChatGPT_v1._0.Training
         public void WorkNeuralNetwork()
         {
             neuralNetwork = dataNeuralNetwork.GetData();
+            error = dataNeuralNetwork.Error;
+            learningRate = dataNeuralNetwork.LearningRate;
 
             while (true)
             {
                 var text = Console.ReadLine();
                 if (text == "l")
                 {
-                    error = neuralNetwork.Learn(trainingData, epoch: 700);
+                    
+                    error = neuralNetwork.Learn(trainingData, epoch: AddEpoch(int.Parse(Console.ReadLine())));
 
                     Console.WriteLine($"Ошибка после обучения: {error}");
                 }
                 else if (text == "stop") break;
                 else if (text == "s")
                 {
-                    dataNeuralNetwork.SetData(neuralNetwork.Layers);
+                    dataNeuralNetwork.SetData(neuralNetwork.Layers, error, learningRate, epochCount);
                     Console.WriteLine("Save finish");
                 }
                 else
@@ -90,36 +95,42 @@ namespace SchoolChatGPT_v1._0.Training
         }
         private double FirstLearning(Topology topology)
         {
-            double error = 100;
+            error = 100;
             Console.WriteLine("Этап 1");
             while (error > 10)
             {
                 Console.WriteLine("restart");
                 neuralNetwork = new NeuralNetwork(topology);
-                error = neuralNetwork.Learn(trainingData, epoch: 30);               
+                error = neuralNetwork.Learn(trainingData, epoch: AddEpoch(30));               
             }
             Console.WriteLine(error);
             Console.WriteLine("Этап 2");
-            while (error > 0.005)
+            while (error > 0.05)
             {
-                error = neuralNetwork.Learn(trainingData, epoch: 100);
+                error = neuralNetwork.Learn(trainingData, epoch: AddEpoch(30));
             }
             return error;
         }
 
         private double FirstLearning()
         {
-            double error = 100;
+            error = 100;
             //while (error > 10)
             {
                // neuralNetwork = new NeuralNetwork(null);
-                error = neuralNetwork.Learn(trainingData, epoch: 10);
+                error = neuralNetwork.Learn(trainingData, epoch: AddEpoch(10));
             }
            // while (error > 0.005)
             {
-                error = neuralNetwork.Learn(trainingData, epoch: 10);
+                error = neuralNetwork.Learn(trainingData, epoch: AddEpoch(10));
             }
             return error;
+        }
+
+        private int AddEpoch(int epoch)
+        {
+            epochCount += epoch;
+            return epoch;
         }
     }
 }

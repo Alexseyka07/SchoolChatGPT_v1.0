@@ -8,7 +8,7 @@ namespace Settings
 {
     public static class Settings
     {
-        public static string AppPath { get; set; } = @"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0";
+        public static string AppPath { get; set; } = @"E:\Alex\Prodaction\Programming\Unity\SchoolChatGPT_v1.0";
 
 
     }

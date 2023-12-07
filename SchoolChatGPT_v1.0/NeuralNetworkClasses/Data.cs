@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Settings;
 
 
 namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
@@ -26,7 +27,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             this.wordsData = null;
             this.name = name;
-            path = Path.Combine(@"E:\Yandex Disk\YandexDisk\prodaction\GitHub\SchoolChatGPT_v1.0", "data.json");
+            path = Path.Combine(Settings.Settings.AppPath, "data.json");
         }
 
         /// <summary>

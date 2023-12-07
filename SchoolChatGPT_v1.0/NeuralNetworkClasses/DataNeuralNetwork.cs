@@ -16,6 +16,9 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         private string name;
         private string json;
         public List<Layer> Layers { get; set; }
+        public double Error { get; set; }
+        public double LearningRate { get; set; }
+        public int EpochCount { get; set; }
 
 
 
@@ -40,6 +43,9 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
                 List<Layer> layers = data.Layers;
                 NeuralNetwork neuralNetwork = new NeuralNetwork(topology, layers);
+                Error = data.Error;
+                LearningRate = data.LearningRate;
+                EpochCount = data.EpochCount;
                 return neuralNetwork;
             }
            /* catch
@@ -53,18 +59,21 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// <summary>
         /// Установить данные в файл JSON.
         /// </summary>
-        public void SetData(List<Layer> layers)
+        public void SetData(List<Layer> layers, double error, double learningRate, int epochCount)
         {
-            UpdateData(layers);
+            UpdateData(layers, error, learningRate, epochCount);
 
             DataNeuralNetwork data = this;
             json = JsonConvert.SerializeObject(data);
             File.WriteAllText(path, json);
         }
 
-        private void UpdateData(List<Layer> layers)
+        private void UpdateData(List<Layer> layers, double error, double learningRate, int epochCount)
         {
             Layers = layers;
+            Error = error;
+            LearningRate = learningRate;
+            EpochCount = epochCount;
         }
     }
 }
