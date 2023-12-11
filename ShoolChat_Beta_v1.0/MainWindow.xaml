@@ -273,6 +273,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type Button}">
+            <Grid/>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
 
@@ -295,8 +298,8 @@
             <Button Grid.Column="0" x:Name="MagicBt" Style="{DynamicResource ButtonStyleCR}" Background="#878787" Content="Магия" FontSize="15" Foreground="White" Click="MagicBt_Click" />
             <Button Grid.Column="1" x:Name="LearningBt" Style="{DynamicResource ButtonStyleCR}" Background="#191919" Content="Обучение" FontSize="15" Foreground="White" Click="LearningBt_Click" />
         </Grid>
-        <TabControl x:Name="AppWindowTabControl" Grid.Row="2" SelectedItem="1"  BorderThickness="0" Background="#212121" SelectionChanged="AppWindowTabControl_SelectionChanged">
-            <TabItem x:Name="Tab1" Visibility="Collapsed">
+        <TabControl x:Name="AppWindowTabControl" Grid.Row="2" SelectedItem="1"  BorderThickness="0" Background="#212121">
+            <TabItem x:Name="MagicWindow_TabItem" Visibility="Collapsed">
                 <Grid Background="#212121">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*" />
@@ -340,36 +343,95 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="Tab2" Visibility="Collapsed">
-                <Grid Background="#212121">
+            <TabItem x:Name="LearningWindow_TabItem" Visibility="Collapsed" >
+                <Grid Background="#212121" Name="BGLearningWindow_Grid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*" />
                         <ColumnDefinition Width="75*" />
                     </Grid.ColumnDefinitions>
-                    <Border Background="#2C2C2C">
+                    <Border Grid.Column="0" Background="#2C2C2C">
                         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-
-                            <StackPanel Grid.Row="1" x:Name="Menu_StackPanel"  Margin="5">
+                            <StackPanel Margin="5">
+                                <Button x:Name="FirstStage_Button"  Style="{DynamicResource ButtonLeftPanel}" Height="40" Background="#FF2C2C2C" Margin="0,0,0,10"
+                                    Padding="10,0,0,0" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Content="Первый этап"
+                                    Click="FirstStage_Button_Click"/>
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="74.77*" />
-                            <RowDefinition Height="25.23*" />
+                            <RowDefinition Height="90*" />
+                            <RowDefinition Height="10*" />
                         </Grid.RowDefinitions>
 
-                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                            <StackPanel Name="Ma">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="0">
+                            <StackPanel Name="NeuralNetworkParams_StackPanel">
+                                <Label Content="Обучение нейросети" Foreground="White" FontSize="24"
+                                       Margin="5"/>
+                                <Label x:Name="Error_Label" Margin="10,0,0,0" FontSize="16"
+                                       Content="Коэффициент ошибки: 0,000344" Foreground="#8B8B8B"/>
+                                <Label x:Name="Epoch_Label" Margin="10,0,0,0" FontSize="16"
+                                       Content="Эпох обучения пройдено: 350" Foreground="#8B8B8B"/>
+                                <Label x:Name="LearningRate_Label" Margin="10,0,0,0" FontSize="16"
+                                       Content="Темп обучения(learning rate): 0.2" Foreground="#8B8B8B"/>
+                                <Label Content="Новые данные для обучения" Foreground="White" FontSize="24"
+                                       Margin="5"/>
+                                <TextBlock Margin="10,0,0,0" FontSize="16" TextWrapping="WrapWithOverflow"
+                                       Text="Введите предложения и выходной результат в виде:
+предложение$(1 или 0):
+0 - если это вопрос о правиле
+1 - если это задача" 
+                                       Foreground="#8B8B8B"/>
+                                <TextBox x:Name="NewData_TextBox" Grid.Column="0" 
+                                        
+                                         TextChanged="NewData_TextBox_TextChanged"  Style="{DynamicResource TextBoxStyle666}"
+                                         TextWrapping="Wrap" Foreground="White" FontSize="15" 
+                                         Background="#333333" Padding="15" Margin="10" Height="150"/>
+                                <Label Margin="10,0,0,0" FontSize="16"
+                                       Content="Введите количество эпох обучения" Foreground="#8B8B8B"/>
+                                <TextBox x:Name="EpochCount_TextBox" Grid.Column="0" 
+                           
+                                         TextChanged="EpochCount_TextBox_TextChanged"  Style="{DynamicResource TextBoxStyle666}"
+                                         TextWrapping="Wrap" Foreground="White" FontSize="15" 
+                                         Background="#333333" Padding="15" Margin="10"/>
+                                <Label Margin="10,0,0,0" FontSize="16"
+                                       Content="Введите скорость обучения(learning rate)" Foreground="#8B8B8B"/>
+                                <TextBox x:Name="LearningRate_TextBox" Grid.Column="0" 
+                                        
+                                         TextChanged="LearningRate_TextBox_TextChanged"  Style="{DynamicResource TextBoxStyle666}"
+                                         TextWrapping="Wrap" Foreground="White" FontSize="15" 
+                                         Background="#333333" Padding="15" Margin="10"/>
                             </StackPanel>
                         </ScrollViewer>
+                        <Border Grid.Row="1" Background="#212121" BorderThickness="0,1,0,0" BorderBrush="#606060">
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60*" />
+                                    <ColumnDefinition Width="25*" />
+                                    <ColumnDefinition Width="25*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="#2C2C2C" CornerRadius="15">
+                                    <Label x:Name="Progress_label" VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Center" Content="Заполните все поля" Foreground="White"/>
+                                </Border>
+                                <Button x:Name="Cancellation_Button" Style="{DynamicResource ButtonStopAndCancellation}"  Grid.Column="1"  Margin="5,0,0,0"
+                                        Background="#5A0000" Foreground="White" Content="Сбросить нейросеть" Click="Cancellation_Button_Click" IsEnabled="False">
+                                </Button>
+                                <Button x:Name="Start_Button" Style="{DynamicResource ButtonStyle2}" Grid.Column="2"  Margin="5,0,0,0" IsEnabled="False"
+                                        Background="#616D51" Content="Поехали!" Foreground="White" FontSize="15" Click="Start_Button_Click"/>
+
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
         <Grid Grid.Row="3" Background="#2C2C2C">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="359*"/>
+                <ColumnDefinition Width="41*"/>
+            </Grid.ColumnDefinitions>
             <Label Content="ALEXPRODUCT" VerticalAlignment="Center" Foreground="#959595" HorizontalAlignment="Left" />
-            <Label Content="beta v1.0" VerticalAlignment="Center" Foreground="#959595" HorizontalAlignment="Right" />
+            <Label Content="beta v1.0" VerticalAlignment="Center" Foreground="#959595" HorizontalAlignment="Left" Grid.Column="1" Margin="24,0,0,0" />
         </Grid>
     </Grid>
 </Window>

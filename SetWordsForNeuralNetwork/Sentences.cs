@@ -14,15 +14,14 @@ namespace SetWordsForNeuralNetwork
 
         private Data data; // Создаем экземпляр класса Data
         private Dictionary<string, int> wordsData; // Создаем словарь для хранения слов и их значений
-        private string input;
+        private string newData;
 
-        public Sentences(string input)
-        {
-            data = new Data("data");
-            data = data.GetData(); // Получаем данные с помощью метода GetData() из класса Data
+        public Sentences(string newData, Data data)
+        {            
+
             wordsData = data.wordsData;
             trainingData = data.trainingData;
-            this.input = input;
+            this.newData = newData;
         }
 
         public List<Tuple<double, string>> SetSentences(string sentences)
@@ -55,7 +54,10 @@ namespace SetWordsForNeuralNetwork
 
         public void SetTrainingData()
         {
-            List<Tuple<double, string>> sentenses = SetSentences(input);
+            string inputWords = Regex.Replace(newData, "1", " ");
+            inputWords = Regex.Replace(newData, "0", " ");
+            SetWords(inputWords);
+            List<Tuple<double, string>> sentenses = SetSentences(newData);
            
             
             for (int i = 0; i < sentenses.Count; i++)
@@ -90,7 +92,12 @@ namespace SetWordsForNeuralNetwork
             }
             data.SetData(wordsData, trainingData);
         }
-
+        private void SetWords(string input)
+        {
+            Console.WriteLine("Введите слова:");
+            Words words = new Words();
+            words.SetWords(newData);
+        }
         private string RemovePunctuation(string input)
         {
             // Используем регулярное выражение для удаления знаков препинания

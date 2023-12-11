@@ -67,6 +67,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\Chat.cs" />
+    <Compile Include="classes\Learning.cs" />
     <Compile Include="classes\NeuralNetworkGPT.cs" />
     <Compile Include="classes\Topology.cs" />
     <Compile Include="DataChats.cs" />
@@ -122,6 +123,10 @@
     <ProjectReference Include="..\Settings\Settings.csproj">
       <Project>{aedaa1f7-527a-4c55-9bcd-4a10738e01da}</Project>
       <Name>Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SetWordsForNeuralNetwork\SetWordsForNeuralNetwork.csproj">
+      <Project>{2d4767ea-1111-412e-80bd-3eb2d6f5f5f0}</Project>
+      <Name>SetWordsForNeuralNetwork</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

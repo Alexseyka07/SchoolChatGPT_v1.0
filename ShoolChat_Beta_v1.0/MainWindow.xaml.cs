@@ -15,22 +15,23 @@ namespace ShoolChat_Beta_v1._0
         //Magic window
         Style style;
         Chat chat;
+        Learning learning;
 
         
         
 
         public MainWindow()
         {
-            //if (TopologyApp.PathApp != null)
-            {
-                TopologyApp.InitializeNeuralNetwork();
-            }
+
+            TopologyApp.InitializeNeuralNetwork();
+            
             InitializeComponent();
             
 
             //Magic window
             style = (Style)FindResource("ButtonLeftPanel");
-           chat = new Chat(ChatsSp, MainChatSp, MessageBt, MessageTb, style);
+            chat = new Chat(ChatsSp, MainChatSp, MessageBt, MessageTb, style);
+            learning = new Learning(FirstStage_Button, Start_Button, Cancellation_Button, LearningRate_TextBox);
         }
 
         #region Magic_Window   
@@ -89,9 +90,35 @@ namespace ShoolChat_Beta_v1._0
 
         #endregion
 
-        private void AppWindowTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FirstStage_Button_Click(object sender, RoutedEventArgs e)
         {
+            learning.FirstStage_Button_Click(sender, e);
+        }
 
+        private void Start_Button_Click(object sender, RoutedEventArgs e)
+        {
+            learning.Start_Button_Click(sender, e);
+        }
+
+        private void Cancellation_Button_Click(object sender, RoutedEventArgs e)
+        {
+            learning.Cancellation_Button_Click(sender, e);
+        }
+
+        private void EpochCount_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            learning.EpochCount_TextBox_TextChanged(sender, e);
+        }
+
+        private void LearningRate_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(learning != null)
+            learning.LearningRate_TextBox_TextChanged(sender, e) ;
+        }
+
+        private void NewData_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            learning.NewData_TextBox_TextChanged(sender , e);
         }
     }
 }
