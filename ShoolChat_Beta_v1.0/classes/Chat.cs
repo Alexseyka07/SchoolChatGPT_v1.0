@@ -169,7 +169,7 @@ namespace ShoolChat_Beta_v1._0.classes
 
             
            
-             string gptAnswer = TopologyApp.NetworkGPT.GPTWork(message);
+             string gptAnswer = TopologyApp.NetworkGPT1.GPTWork(message);
             
             chatsList[actualIndexChat].Add(gptAnswer);
             TextBlock label = new TextBlock

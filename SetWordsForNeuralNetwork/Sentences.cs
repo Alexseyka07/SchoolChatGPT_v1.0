@@ -18,7 +18,7 @@ namespace SetWordsForNeuralNetwork
 
         public Sentences(string newData, Data data)
         {            
-
+            this.data = data;
             wordsData = data.wordsData;
             trainingData = data.trainingData;
             this.newData = newData;

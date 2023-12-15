@@ -11,8 +11,7 @@ namespace SchoolChatGPT_v1._0
         {
             
 
-            Training.Training training = new Training.Training();
-            training.WorkNeuralNetwork();
+          
 
             
             Console.ReadLine();

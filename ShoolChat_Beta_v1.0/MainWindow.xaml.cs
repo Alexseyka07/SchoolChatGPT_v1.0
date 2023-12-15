@@ -31,7 +31,9 @@ namespace ShoolChat_Beta_v1._0
             //Magic window
             style = (Style)FindResource("ButtonLeftPanel");
             chat = new Chat(ChatsSp, MainChatSp, MessageBt, MessageTb, style);
-            learning = new Learning(FirstStage_Button, Start_Button, Cancellation_Button, LearningRate_TextBox);
+            learning = new Learning(FirstStage_Button, Start_Button, Cancellation_Button,
+                LearningRate_TextBox,NewData_TextBox, Progress_label, EpochCount_TextBox,
+                LearningRate_Label, Error_Label, Epoch_Label);
         }
 
         #region Magic_Window   
@@ -119,6 +121,11 @@ namespace ShoolChat_Beta_v1._0
         private void NewData_TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             learning.NewData_TextBox_TextChanged(sender , e);
+        }
+
+        private void SecondStage_Button_Click(object sender, RoutedEventArgs e)
+        {
+            learning.SecondStage_Button_Click(sender , e);
         }
     }
 }

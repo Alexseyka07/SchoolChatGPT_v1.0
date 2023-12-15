@@ -16,7 +16,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public List<Tuple<double, double[]>> trainingData;
         private string json;
         private string path;
-        private string name;
+        public string name;
        
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         {
             this.wordsData = null;
             this.name = name;
-            path = Path.Combine(Settings.Settings.AppPath, "data.json");
+            path = Path.Combine(Settings.Settings.AppPath, $"{name}.json");
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             catch
             {
                 SetData(new Dictionary<string, int>() { { "Что", 1 } }, new List<Tuple<double, double[]>>());
-                return new Data("data");
+                return new Data(name);
             }
         }
 

@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
 {
@@ -35,7 +38,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
             CreateOutputLayer();
         }
 
-        public NeuralNetwork(Topology topology, List<Layer> layers)
+        public NeuralNetwork(Topology topology,  List<Layer> layers)
         {
             Topology = topology;
             Layers = new List<Layer>();
@@ -83,30 +86,23 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         public double Learn(List<Tuple<double, double[]>> dataSet, int epoch)
         {
             var error = 0.0;
-            var num = 0;
+            
 
-            Console.WriteLine("Эпох пройденно:");
-            for (int i = 0; i < epoch; i++)
+            
+           // for (int i = 0; i < epoch; i++)
             {
                 foreach (var data in dataSet)
                 {
                     error += BackPropagation(data.Item1, data.Item2);
                 }
-                num++;
+                
 
-                Console.SetCursorPosition(0, Console.CursorTop);
-                Console.Write($" Загружено: {CalculatePercentage(num, epoch)}%");
             }
-            Console.WriteLine();
+          
             return error / epoch;
         }
-
-        static double CalculatePercentage(double number, double total)
-        {
-
-            return (number / total) * 100;
-
-        }
+       
+        
         /// <summary>
         /// Выполняет обратное распространение ошибки (обучение) для заданного обучающего примера.
         /// </summary>

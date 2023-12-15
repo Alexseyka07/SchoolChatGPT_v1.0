@@ -355,6 +355,9 @@
                                 <Button x:Name="FirstStage_Button"  Style="{DynamicResource ButtonLeftPanel}" Height="40" Background="#FF2C2C2C" Margin="0,0,0,10"
                                     Padding="10,0,0,0" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Content="Первый этап"
                                     Click="FirstStage_Button_Click"/>
+                                <Button x:Name="SecondStage_Button"  Style="{DynamicResource ButtonLeftPanel}" Height="40" Background="#FF2C2C2C" Margin="0,0,0,10"
+                                    Padding="10,0,0,0" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Content="Первый этап"
+                                    Click="SecondStage_Button_Click"/>
                             </StackPanel>
                         </ScrollViewer>
                     </Border>

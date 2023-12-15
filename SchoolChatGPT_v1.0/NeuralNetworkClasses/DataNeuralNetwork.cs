@@ -37,7 +37,7 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
         /// </summary>
         public NeuralNetwork GetData()
         {
-           // try
+            try
             {
                 json = File.ReadAllText(path);
                 DataNeuralNetwork data = JsonConvert.DeserializeObject<DataNeuralNetwork>(json);
@@ -48,12 +48,12 @@ namespace SchoolChatGPT_v1._0.NeuralNetworkClasses
                 EpochCount = data.EpochCount;
                 return neuralNetwork;
             }
-           /* catch
+            catch
             {
-                NeuralNetwork neuralNetwork = new NeuralNetwork();
-                SetData(neuralNetwork);
+                NeuralNetwork neuralNetwork = new NeuralNetwork(topology);
+                SetData(neuralNetwork.Layers,100,0,0);
                 return neuralNetwork;
-            }*/
+            }
         }
 
         /// <summary>
